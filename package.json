@@ -3,9 +3,20 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve",
+    "\n========== Serving ==========": "",
+    "dev": "nx serve",
+    "\n========== Building ==========": "",
     "build": "nx build",
-    "test": "nx test"
+    "build:icons": "npx @svgr/cli  -- ./svg && prettier --write ./src/components/icons",
+    "\n========== Testing ==========": "",
+    "lint": "nx lint",
+    "test": "nx test",
+    "\n========== Utilities ==========": "",
+    "install:clean": "rm -rf node_modules package-lock.json && npm i --save",
+    "\n========== Previewing ==========": "",
+    "preview": "nx preview",
+    "\n========== Lifecycle hooks ==========": "",
+    "prepare": "husky"
   },
   "private": true,
   "dependencies": {
