@@ -1,0 +1,47 @@
+{
+  "heading": "Access, Curriculum, and Employability (ACE) Scholarship Program",
+  "description": "Since 2005, the Foundation has implemented the Access, Curriculum, and Employability (ACE) Scholarship Program to empower young underprivileged Filipinos. In recent years, JGF has strengthened the curriculum aspect by establishing Agro-Enterprise Resource Centers (AERCs) to support its initiatives for agriculture.\n\n JGF's collaborations with ACE partners include curriculum development to help institutionalize the practice of agro-entrepreneurship, and scholarships to heighten the youth's interest in the opportunities in agriculture.\n\n Through education and training opportunities, AERCs encourage young people to look at farming as a viable source of livelihood, thereby cultivating a new breed of Filipino agro-entrepreneurs to carry the agriculture industry forward. AERCs offer the Agro-entrepreneurship National Certificate II course, which is accredited by the Technical Education and Skills Development Authority (TESDA). The course curriculum was developed in 2021 with Don Bosco Training Center Mati.\n\n To date, there are five AERCs located in Don Bosco Mati (Davao Oriental), Sacred Heart Savings Cooperative (Ilocos Sur), Lamac Multi-Purpose Cooperative (Cebu), Don Bosco Agro-Mechanical Technology Center Legazpi (Albay), and Don Bosco San Jose (Nueva Ecija). There were 188 agro-entrepreneur scholars assisted for school year 2022-2023.\n\n The Foundation also supports the training of young women through its partnership with Anihan Technical Schoolfor the Quick ServiceRestaurant Operations (QSRO) program. The course that JGF and Anihan co-created providesrelevant training that matches the requirements of the food service industry.\n\n Since 2005, a total of 2,754 scholars have been assisted opening up employment opportunities to support their families.",
+  "stories": "ACE Stories",
+  "scholarshipCoinBank": "Scholarship Coin Bank",
+  "coinBankDescription": "<b>In 2022, the Foundation launched the Scholarship Coin Bank, through which the public can help support more youth scholars. Over the years, the coin banks have served as JGF's way to engage Jollibee Group customers to be part of its programs.</b>\n\n Coin banks can be found on the counters of Jollibee, Greenwich, Chowking, Mang Inasal, Red Ribbon, Burger King, Panda Express, and Yoshinoya restaurants nationwide. Donations can also be made online to make it more accessible to the public.",
+  "donate": "How to donate online",
+  "donateNow": "Donate Now",
+  "donationChannel": {
+    "bankTransfer": {
+      "title": "Bank Transfer",
+      "accountName": "Account Name:",
+      "accountNameValue": "Jollibee Group Foundation",
+      "bank": {
+        "metrobank": {
+          "label": "Metrobank:",
+          "accountNumber": "473-7-473-01406-4",
+          "swiftCode": "SWIFT Code: MBTCPHMM"
+        },
+        "rcbc": {
+          "label": "RCBC:",
+          "accountNumber": "1253-10519-0"
+        }
+      }
+    },
+    "maya": {
+      "title": "Maya",
+      "scan": "Scan thru the Maya app",
+      "donate": "Click to donate thru maya"
+    },
+    "gcash": {
+      "title": "GCash",
+      "scan": "Scan to donate"
+    },
+    "grabRewards": {
+      "title": "Grab Rewards",
+      "donate": "Go to “Donate with Points”",
+      "point": {
+        "50": "Donate PHP50 - 675 points",
+        "200": "Donate PHP200 - 2,700 points"
+      }
+    }
+  },
+  "programSiteMap": "Program Site Map",
+  "fep": "Farmer Entrepreneurship Program",
+  "foodAid": "Jollibee Group Foodaid"
+}

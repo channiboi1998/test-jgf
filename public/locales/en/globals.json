@@ -1,0 +1,45 @@
+{
+  "nav": {
+    "home": "Home",
+    "aboutUs": "About Us",
+    "themeDiscussion": "Theme",
+    "agriculture": "Agriculture",
+    "disasterResponse": "Disaster Response",
+    "education": "Education",
+    "mangrove": "Mangrove",
+    "accomplishmentReports": "Previous Reports"
+  },
+  "report": {
+    "2022": {
+      "title": "2022 Accomplishment Report"
+    },
+    "2021": {
+      "title": "2021 Accomplishment Report"
+    },
+    "2020": {
+      "title": "2020 Accomplishment Report"
+    },
+    "2019": {
+      "title": "2019 Accomplishment Report"
+    },
+    "2018": {
+      "title": "2018 Accomplishment Report"
+    },
+    "2017": {
+      "title": "2017 Accomplishment Report"
+    },
+    "2016": {
+      "title": "2016 Accomplishment Report"
+    },
+    "commemorativeBook": {
+      "title": "10th Year Commemorative Book",
+      "description": "This chronicles Jollibee Group Foundation's first decade and highlights how its programs have impacted lives of families and communities from the perspective of partners."
+    }
+  },
+  "backTo": "Back to",
+  "top": "Top",
+  "home": "Home",
+  "readMore": "Read more",
+  "viewMore": "View More",
+  "viewLess": "View Less"
+}

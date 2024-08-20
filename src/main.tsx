@@ -1,13 +1,20 @@
-import { StrictMode } from 'react';
-import * as ReactDOM from 'react-dom/client';
+import '@assets/css/fonts.css';
+import '@assets/css/index.css';
+import '@core/i18n';
+import { router } from '@router/router';
+import { EnvironmentConfig } from '@shared/models';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { RouterProvider } from 'react-router-dom';
 
-import App from './app/app';
+declare global {
+  interface Window {
+    environment: EnvironmentConfig;
+  }
+}
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <StrictMode>
-    <App />
-  </StrictMode>
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
 );

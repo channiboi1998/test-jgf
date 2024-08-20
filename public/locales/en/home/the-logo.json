@@ -1,0 +1,18 @@
+{
+  "heading": "The Logo",
+  "description": "The Jollibee Group Foundation logo is composed of visual elements that represents the group's values, aspirations and purpose.",
+  "component": {
+    "theHill": {
+      "heading": "The Hill",
+      "description": "represents the challenging but surmountable uphill journey of community development."
+    },
+    "theRisingSun": {
+      "heading": "The Rising Sun",
+      "description": "represents the vision for a brighter and happier future. Like the hope that springs from a new day, the sunrise also expresses Jollibee Group Foundation's mission to empower and uplift communities."
+    },
+    "theStones": {
+      "heading": "The Stones",
+      "description": "found on the hill serve as guides that lead to the path of positive change. The stones represent the values of the Jollibee Group: Customer Focus, Speed with Excellence, Humility to Listen and Learn, Spirit of Family and Fun, and Integrity."
+    }
+  }
+}

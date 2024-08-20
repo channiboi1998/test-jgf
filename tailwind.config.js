@@ -1,17 +1,93 @@
-const { createGlobPatternsForDependencies } = require('@nx/react/tailwind');
-const { join } = require('path');
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    join(
-      __dirname,
-      '{src,pages,components,app}/**/*!(*.stories|*.spec).{ts,tsx,html}'
-    ),
-    ...createGlobPatternsForDependencies(__dirname),
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      spacing: {
+        header: '88px',
+        'header-lg': '75px',
+        'header-xl': '84px',
+      },
+      borderWidth: {
+        3: '3px',
+        5: '5px',
+        16: '16px',
+      },
+      borderRadius: {
+        20: '20px',
+        30: '30px',
+        50: '50px',
+        180: '180px',
+        about: '0% 50% 50% 0% / 50% 50% 50% 50%',
+      },
+      lineClamp: {
+        10: '10',
+      },
+      width: {
+        19: '76px',
+        22: '88px',
+        23: '84px',
+        27.5: '110px',
+      },
+    },
+    fontFamily: {
+      sans: ['Nunito'],
+    },
+    screens: {
+      xxs: '320px',
+      xs: '370px',
+      sm: '425px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+      xxl: '1440px',
+      xxxl: '2560px',
+    },
+    boxShadow: {
+      card: '0px 4px 23px rgba(0, 0, 0, 0.1)',
+      header: '0px 5px 25px rgba(0, 0, 0, 0.1)',
+    },
+    colors: {
+      // Color naming is based on https://www.color-name.com/
+      amazon: '#377252',
+      apple: '#4CB645',
+      blue: '#094BF5',
+      cultured: '#F5F5F5',
+      firebrick: '#B51F26',
+      gainsboro: '#DBDBDB',
+      inchworm: '#B3D971',
+      jasper: '#D13343',
+      lust: '#E92426',
+      orange: '#F6A000',
+      red: '#FE1C22',
+      teal: '#008080',
+      white: '#FFFFFF',
+      strawberry: '#EB3E40',
+      'american-orange': '#FF8A00',
+      'bright-gray': '#E2F1F1',
+      'bright-yellow-crayola': '#F8A519',
+      'brunswick-green': '#135942',
+      'cafe-noir': '#4D3F1B',
+      'carmine-pink': '#E64242',
+      'castleton-green': '#01583F',
+      'dark-charcoal': '#333333',
+      'fire-opal': '#E25B45',
+      'green-pantone': '#00AD39',
+      'heat-wave': '#FF7A00',
+      'international-orage': '#BF2C35',
+      'la-salle-green': '#008025',
+      'light-silver': '#D9D9D9',
+      'orange-yellow-crayola': '#FFCC66',
+      'orange-yellow': '#FFBA19',
+      'sonic-silver': '#777777',
+      'steel-blue': '#4499AC',
+      'tigers-eye': '#E8913D',
+      'viridian-green': '#008C9F',
+      'vivid-orange-peel': '#FFA000',
+      'white-lilac': '#F8F8F8',
+      'white-smoke': '#F6F6F6',
+      'pale-pink': '#FADCCB',
+    },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar-hide')],
 };

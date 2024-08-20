@@ -1,0 +1,18 @@
+{
+  "ourApproach": "Our Approach",
+  "description": "Three principles guide our work and are reflected in the programs we undertake.",
+  "principle": {
+    "think": {
+      "heading": "Think in Systems",
+      "description": "To understand social issues, we look beyond the presenting problem and consider the patterns and structures around the situation. For instance, hunger is not only about the availability of food supply but also about family income and access to social welfare programs and services.\n\n Our development approach is focused on pursuing innovative solutions that will make a lasting impact on the communities we serve and, in the process, foster genuine and inclusive progress."
+    },
+    "harness": {
+      "heading": "Harness Core Strengths",
+      "description": "Right at the core of our programs and advocacies are the values, systems, tools, and expertise of the Jollibee Group that have assisted communities over the years. The company's quality standards have guided our Busog, Lusog, Talino School Feeding Kitchens and FoodAID program.\n\n Meanwhile, our Farmer Entrepreneurship Program promotes inclusive business by improving the capacity of smallholder farmers to become direct suppliers of the Jollibee Group."
+    },
+    "collaborate": {
+      "heading": "Work Collaboratively",
+      "description": "We believe that every person is capable of creating solutions that will help address various social concerns. The active engagement of our key stakeholders is crucial to our work. We invest in building partnerships with communities and institutions to create and implement programs that are relevant, effective, and sustainable."
+    }
+  }
+}
