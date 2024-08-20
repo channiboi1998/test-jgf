@@ -1,0 +1,36 @@
+{
+  "env": {
+    "dev": "https://jgf-web-dev.jfcapps.io",
+    "sit": "https://jgf-web-sit.jfcapps.io",
+    "uat": "https://jgf-web-uat.jfcapps.io",
+    "stg": "https://jgf-web-stg.jfcapps.com",
+    "prd": "https://annualreport-foundation.jollibeegroup.com"
+  },
+  "urls": [
+    {
+      "url": "/",
+      "changefreq": "monthly",
+      "priority": 1
+    },
+    {
+      "url": "/ace-scholarship-program",
+      "changefreq": "monthly",
+      "priority": 0.9
+    },
+    {
+      "url": "/agro-entrepreneurship",
+      "changefreq": "monthly",
+      "priority": 0.9
+    },
+    {
+      "url": "farmer-entrepreneurship-program",
+      "changefreq": "monthly",
+      "priority": 0.9
+    },
+    {
+      "url": "/foodaid",
+      "changefreq": "monthly",
+      "priority": 0.9
+    }
+  ]
+}

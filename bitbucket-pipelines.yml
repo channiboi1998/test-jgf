@@ -1,0 +1,173 @@
+# red-ribbon-web-app pipeline
+
+image:
+  name: 706096107052.dkr.ecr.ap-southeast-1.amazonaws.com/pipeline/node-awscli:20.12.0
+  aws:
+    access-key: $AWS_ACCESS_KEY_ID
+    secret-key: $AWS_SECRET_ACCESS_KEY
+
+options:
+  max-time: 10
+
+definitions:
+  steps:
+    - step: &run-unit-tests
+        name: Run unit tests
+        caches:
+          - node
+        artifacts:
+          download: false
+        script:
+          - make ci-test
+    - step: &build-artifacts
+        name: Build artifacts
+        caches:
+          - node
+        script:
+          - make ci-compile
+        artifacts:
+          - build/**
+    - step: &build-docker-image
+        name: Build docker image
+        trigger: manual
+        caches:
+          - docker
+        services:
+          - docker
+        script:
+          - export DOCKER_BUILDKIT=1
+          - make ci-build && make ci-push
+    - step: &deploy-to-dev
+        name: Deploy to DEV
+        trigger: manual
+        deployment: DEV
+        artifacts:
+          download: false
+        script:
+          - echo "Deploying to DEV environment"
+          - pipe: atlassian/aws-ecs-deploy:1.0.0
+            variables:
+              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+              CLUSTER_NAME: 'marketing-jgf-dev'
+              SERVICE_NAME: 'marketing-jgf-web-app-dev'
+              TASK_DEFINITION: 'task-definition-dev.json'
+              FORCE_NEW_DEPLOYMENT: 'true'
+    - step: &deploy-to-sit
+        name: Deploy to SIT
+        trigger: manual
+        deployment: SIT
+        artifacts:
+          download: false
+        script:
+          - echo "Deploying to SIT environment"
+          - pipe: atlassian/aws-ecs-deploy:1.0.0
+            variables:
+              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+              CLUSTER_NAME: 'marketing-jgf-sit'
+              SERVICE_NAME: 'marketing-jgf-web-app-sit'
+              TASK_DEFINITION: 'task-definition-sit.json'
+              FORCE_NEW_DEPLOYMENT: 'true'
+    - step: &deploy-to-uat
+        name: Deploy to UAT
+        trigger: manual
+        deployment: UAT
+        artifacts:
+          download: false
+        script:
+          - echo "Deploying to UAT environment"
+          - pipe: atlassian/aws-ecs-deploy:1.0.0
+            variables:
+              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+              CLUSTER_NAME: 'marketing-jgf-uat'
+              SERVICE_NAME: 'marketing-jgf-web-app-uat'
+              TASK_DEFINITION: 'task-definition-uat.json'
+              FORCE_NEW_DEPLOYMENT: 'true'
+    - step: &deploy-to-stg
+        name: Deploy to STG
+        trigger: manual
+        deployment: STG
+        artifacts:
+          download: false
+        script:
+          - echo "Deploying to STG environment"
+          - pipe: atlassian/aws-ecs-deploy:1.0.0
+            variables:
+              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID_PRD
+              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY_PRD
+              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+              CLUSTER_NAME: 'marketing-jgf-stg'
+              SERVICE_NAME: 'marketing-jgf-web-app-stg'
+              TASK_DEFINITION: 'task-definition-stg.json'
+              FORCE_NEW_DEPLOYMENT: 'true'
+    - step: &deploy-to-prd
+        name: Deploy to PRD
+        trigger: manual
+        deployment: PRD
+        artifacts:
+          download: false
+        script:
+          - echo "Deploying to PRD environment"
+          - pipe: atlassian/aws-ecs-deploy:1.0.0
+            variables:
+              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID_PRD
+              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY_PRD
+              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+              CLUSTER_NAME: 'marketing-jgf-prd'
+              SERVICE_NAME: 'marketing-jgf-web-app-prd'
+              TASK_DEFINITION: 'task-definition-prd.json'
+              FORCE_NEW_DEPLOYMENT: 'true'
+
+pipelines:
+  default:
+    - step: *run-unit-tests
+    - step: *build-artifacts
+  pull-requests:
+    '**':
+      - step: *run-unit-tests
+      - step: *build-artifacts
+  branches:
+    '{poc/*}':
+      - step:
+          name: POC pipeline
+          clone:
+            enabled: false
+          script:
+            - echo "POC pipeline execution."
+      - step:
+          <<: *build-artifacts
+          trigger: manual
+      - parallel:
+          - step:
+              <<: *run-unit-tests
+              trigger: manual
+          - step: *build-docker-image
+          - step: *deploy-to-dev
+    '{feature/*,chore/*}':
+      - step: *run-unit-tests
+      - step: *build-artifacts
+      - step: *build-docker-image
+      - step: *deploy-to-dev
+    '{release/*,master}':
+      - step: *run-unit-tests
+      - step: *build-artifacts
+      - step: *build-docker-image
+      - parallel:
+          - step: *deploy-to-dev
+          - step: *deploy-to-sit
+          - step: *deploy-to-uat
+          - step: *deploy-to-stg
+          - step: *deploy-to-prd
+  tags:
+    'v*':
+      - parallel:
+          - step: *deploy-to-dev
+          - step: *deploy-to-sit
+          - step: *deploy-to-uat
+          - step: *deploy-to-stg
+          - step: *deploy-to-prd

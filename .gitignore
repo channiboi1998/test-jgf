@@ -40,3 +40,10 @@ Thumbs.db
 
 .nx/cache
 .nx/workspace-data
+
+# Others
+/tmp
+
+# Environment configs
+public/env.js
+public/apm.js

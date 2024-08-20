@@ -1,0 +1,82 @@
+{
+  "family": "marketing-jgf-web-app-dev",
+  "executionRoleArn": "arn:aws:iam::706096107052:role/NewRelicECSTaskExecutionRole",
+  "requiresCompatibilities": ["FARGATE"],
+  "networkMode": "awsvpc",
+  "cpu": "512",
+  "memory": "1024",
+  "containerDefinitions": [
+    {
+      "name": "marketing-jgf-web-app-dev",
+      "image": "706096107052.dkr.ecr.ap-southeast-1.amazonaws.com/marketing-jgf/web-app:2.0.0",
+      "essential": true,
+      "ulimits": [
+        {
+          "name": "nofile",
+          "softLimit": 524288,
+          "hardLimit": 524288
+        }
+      ],
+      "environment": [{ "name": "NGINX_ENV", "value": "dev" }],
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "hostPort": 8080,
+          "protocol": "tcp"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/marketing-jgf-web-app-dev",
+          "awslogs-region": "ap-southeast-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "curl -f http://localhost:8080/actuator/health || exit 1"
+        ],
+        "interval": 30,
+        "timeout": 3,
+        "retries": 3
+      }
+    },
+    {
+      "name": "nr-marketing-jgf-web-app-dev",
+      "image": "newrelic/nri-ecs:1.9.9",
+      "cpu": 256,
+      "memoryReservation": 512,
+      "essential": true,
+      "secrets": [
+        {
+          "name": "NRIA_LICENSE_KEY",
+          "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:706096107052:secret:NewRelicLicenseKeySecret-6tKssb4mZEMt-W1Xg8u"
+        }
+      ],
+      "environment": [
+        { "name": "NRIA_OVERRIDE_HOST_ROOT", "value": "" },
+        { "name": "NRIA_IS_FORWARD_ONLY", "value": "true" },
+        { "name": "FARGATE", "value": "true" },
+        {
+          "name": "NRIA_PASSTHROUGH_ENVIRONMENT",
+          "value": "ECS_CONTAINER_METADATA_URI,ECS_CONTAINER_METADATA_URI_V4,FARGATE"
+        },
+        {
+          "name": "NRIA_CUSTOM_ATTRIBUTES",
+          "value": "{\"nrDeployMethod\":\"downloadPage\"}"
+        }
+      ],
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "test -n \"`pgrep newrelic-infra-service`\" || exit 1"
+        ],
+        "interval": 30,
+        "timeout": 3,
+        "retries": 3
+      }
+    }
+  ]
+}
